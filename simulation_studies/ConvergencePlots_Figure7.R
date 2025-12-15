@@ -174,4 +174,4 @@ legend3 <- g3[[which(sapply(g3, function(x) x$name) == "guide-box")]]
 
 #arrange plots and legends
 output_plot <- grid.arrange(p1a,p1b,legend1,p2a,p2b,legend2,p3a,p3b,legend3, nrow = 3, ncol = 3, widths = c(2,2,0.5))
-ggsave("Figure_7.png", plot = output_plot)
+ggsave("Figure_7.png", plot = output_plot, height = 2200,  width = 3000, units = "px")
