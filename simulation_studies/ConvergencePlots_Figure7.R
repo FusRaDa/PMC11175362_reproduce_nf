@@ -6,14 +6,37 @@ library(dplyr)
 #set desired directory, likely downloads
 #setwd("Downloads/ToxPi-Weight-Estimation")
 
+#set file input args instead
+args <- commandArgs(trailingOnly = TRUE)
+input_file_path1 <- args[1]
+input_file_path2 <- args[2]
+input_file_path3 <- args[3]
+input_file_path4 <- args[4]
+input_file_path5 <- args[5]
+input_file_path6 <- args[6]
+input_file_path7 <- args[7]
+input_file_path8 <- args[8]
+input_file_path9 <- args[9]
+input_file_path10 <- args[10]
+input_file_path11 <- args[11]
+input_file_path12 <- args[12]
+input_file_path13 <- args[13]
+input_file_path14 <- args[14]
+input_file_path15 <- args[15]
+input_file_path16 <- args[16]
+input_file_path17 <- args[17]
+input_file_path18 <- args[18]
+input_file_path19 <- args[19]
+input_file_path20 <- args[20]
+
 #load in MAE data for varying convergence
-load('simulation_studies/stats_data/stats50Converge3Bins500SamplesV2.rdata')
+load(input_file_path1)
 errorDF_50 <- errorDF
-load('simulation_studies/stats_data/stats100Converge3Bins500SamplesV2.rdata')
+load(input_file_path2)
 errorDF_100 <- errorDF
-load('simulation_studies/stats_data/stats500Converge3Bins500SamplesV2.rdata')
+load(input_file_path3)
 errorDF_500 <- errorDF
-load('simulation_studies/stats_data/stats1000Converge3Bins500SamplesV2.rdata')
+load(input_file_path4)
 errorDF_1000 <- errorDF
 
 errorDF <- rbind(errorDF_50, errorDF_100, errorDF_500, errorDF_1000)
@@ -76,40 +99,40 @@ p2b <- ggplot(norm_6RatioDF, aes(factor(ConvergeLim), GaRunningTime - OrdRunning
 
 
 #get results for changing total samples
-load('simulation_studies/stats_data/runningTime_sameNode/stats50Converge3Bins500SamplesV2.rdata')
+load(input_file_path5)
 errorDF_50 <- errorDF
-load('simulation_studies/stats_data/runningTime_sameNode/stats50Converge3Bins1000SamplesV2.rdata')
+load(input_file_path6)
 errorDF_50 <- rbind(errorDF_50, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats50Converge3Bins5000SamplesV2.rdata')
+load(input_file_path7)
 errorDF_50 <- rbind(errorDF_50, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats50Converge3Bins10000SamplesV2.rdata')
+load(input_file_path8)
 errorDF_50 <- rbind(errorDF_50, errorDF)
 
-load('simulation_studies/stats_data/runningTime_sameNode/stats100Converge3Bins500SamplesV2.rdata')
+load(input_file_path9)
 errorDF_100 <- errorDF
-load('simulation_studies/stats_data/runningTime_sameNode/stats100Converge3Bins1000SamplesV2.rdata')
+load(input_file_path10)
 errorDF_100 <- rbind(errorDF_100, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats100Converge3Bins5000SamplesV2.rdata')
+load(input_file_path11)
 errorDF_100 <- rbind(errorDF_100, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats100Converge3Bins10000SamplesV2.rdata')
+load(input_file_path12)
 errorDF_100 <- rbind(errorDF_100, errorDF)
 
-load('simulation_studies/stats_data/runningTime_sameNode/stats500Converge3Bins500SamplesV2.rdata')
+load(input_file_path13)
 errorDF_500 <- errorDF
-load('simulation_studies/stats_data/runningTime_sameNode/stats500Converge3Bins1000SamplesV2.rdata')
+load(input_file_path14)
 errorDF_500 <- rbind(errorDF_500, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats500Converge3Bins5000SamplesV2.rdata')
+load(input_file_path15)
 errorDF_500 <- rbind(errorDF_500, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats500Converge3Bins10000SamplesV2.rdata')
+load(input_file_path16)
 errorDF_500 <- rbind(errorDF_500, errorDF)
 
-load('simulation_studies/stats_data/runningTime_sameNode/stats1000Converge3Bins500SamplesV2.rdata')
+load(input_file_path17)
 errorDF_1000 <- errorDF
-load('simulation_studies/stats_data/runningTime_sameNode/stats1000Converge3Bins1000SamplesV2.rdata')
+load(input_file_path18)
 errorDF_1000 <- rbind(errorDF_1000, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats1000Converge3Bins5000SamplesV2.rdata')
+load(input_file_path19)
 errorDF_1000 <- rbind(errorDF_1000, errorDF)
-load('simulation_studies/stats_data/runningTime_sameNode/stats1000Converge3Bins10000SamplesV2.rdata')
+load(input_file_path20)
 errorDF_1000 <- rbind(errorDF_1000, errorDF)
 errorDF <- rbind(errorDF_50, errorDF_100, errorDF_500, errorDF_1000)
 
@@ -150,4 +173,5 @@ g3 <- ggplotGrob(p3a + theme(legend.position="right"))$grobs
 legend3 <- g3[[which(sapply(g3, function(x) x$name) == "guide-box")]]
 
 #arrange plots and legends
-grid.arrange(p1a,p1b,legend1,p2a,p2b,legend2,p3a,p3b,legend3, nrow = 3, ncol = 3, widths = c(2,2,0.5))
+output_plot <- grid.arrange(p1a,p1b,legend1,p2a,p2b,legend2,p3a,p3b,legend3, nrow = 3, ncol = 3, widths = c(2,2,0.5))
+ggsave("Figure_7.png", plot = output_plot)

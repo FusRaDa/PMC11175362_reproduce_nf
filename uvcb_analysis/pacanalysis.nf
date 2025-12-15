@@ -1,10 +1,11 @@
 // This process performs PAC analysis on the provided input data.
 
 // Inputs:
+// uvcb_analysis/PACAnalysis_Figure10.R
 // uvcb_analysis/1994-House_SupTab4.csv
 // uvcb_analysis/qcpheno.out_results.csv
  
- 
+
 // Outputs:
 // Figure_10.png
 
