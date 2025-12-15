@@ -6,3 +6,5 @@ channels:
 dependencies:
   - conda-forge::r-ggplot2=4.0.1
   - conda-forge::r-dplyr=1.1.4
+  - conda-forge::r-gridextra=2.3
+  - conda-forge::r-ordinalnet=2.13
