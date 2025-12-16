@@ -23,7 +23,6 @@
 // simulation_studies/stats_data/runningTime_sameNode/stats1000Converge3Bins5000SamplesV2.rdata
 // simulation_studies/stats_data/runningTime_sameNode/stats1000Converge3Bins10000SamplesV2.rdata
 
-
 // Outputs:
 // Figure_7.png
 

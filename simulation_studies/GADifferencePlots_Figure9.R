@@ -5,10 +5,19 @@ library(dplyr)
 
 #change this to desired directory, likely downloads
 #setwd("Downloads/ToxPi-Weight-Optimization")
+args <- commandArgs(trailingOnly = TRUE)
+input_file_path1 <- args[1]
+input_file_path2 <- args[2]
+input_file_path3 <- args[3]
+input_file_path4 <- args[4]
+input_file_path5 <- args[5]
+input_file_path6 <- args[6]
+input_file_path7 <- args[7]
+input_file_path8 <- args[8]
 
 ################# plot MAE Diff distributions ####################################
 #load in data for consistent convergence limit, number of response levels, and number of samples
-load("simulation_studies/MAEData/dists500Converge3Bins500SamplesV2.rdata")
+load(input_file_path1)
 
 #prep difference dataframe for ordinal and GA performance
 diffData <- data.frame(matrix(, ncol = 8))
@@ -88,13 +97,13 @@ p2 <- p2 + annotate("text", x = .105, y = 5.5, label = "Percent Increased")
 #load in and combine varying sample data for consistent converge and response levels
 allDists_500Samples <- allDist
 
-load("simulation_studies/MAEData/dists500Converge3Bins1000SamplesV2.rdata")
+load(input_file_path2)
 allDists_1000Samples <- allDist
 
-load("simulation_studies/MAEData/dists500Converge3Bins5000SamplesV2.rdata")
+load(input_file_path3)
 allDists_5000Samples <- allDist
 
-load("simulation_studies/MAEData/dists500Converge3Bins10000SamplesV2.rdata")
+load(input_file_path4)
 allDists_10000Samples <- allDist
 
 allDist <- rbind(allDists_500Samples, allDists_1000Samples, allDists_5000Samples, allDists_10000Samples)
@@ -153,13 +162,13 @@ p3 <- p3 + annotate("text", x = .105, y = 4.5, label = "Percent Increased")
 
 #####Plot 4: Varying # response levels
 #load in and combine varying response level data for consistent converge and number of samples
-load("simulation_studies/MAEData/dists500Converge2Bins500SamplesV2.rdata")
+load(input_file_path5)
 allDists_2Bins <- allDist
 
-load("simulation_studies/MAEData/dists500Converge3Bins500SamplesV2.rdata")
+load(input_file_path1)
 allDists_3Bins <- allDist
 
-load("simulation_studies/MAEData/dists500Converge4Bins500SamplesV2.rdata")
+load(input_file_path6)
 allDists_4Bins <- allDist
 
 allDist <- rbind(allDists_2Bins, allDists_3Bins, allDists_4Bins)
@@ -214,7 +223,7 @@ p4 <- p4 + annotate("text", x = .105, y = 3.5, label = "Percent Increased")
 
 #####Plot 4: Varying # response levels
 #load in varying distribution data for consistent converge, response level, and number of samples
-load("simulation_studies/MAEData/dists500Converge3Bins500SamplesV2.rdata")
+load(input_file_path1)
 
 #get consistent number of slices and known ratios
 allDists_6Ratio6Slices <- allDist[allDist$NoSlices == 6,]
@@ -277,7 +286,7 @@ g <- ggplotGrob(p5 + theme(legend.position="bottom"))$grobs
 l5 <- g[[which(sapply(g, function(x) x$name) == "guide-box")]]
 
 #arrange plots and legends
-grid.arrange(
+output_plot <- grid.arrange(
   do.call("arrangeGrob", c(list(p1,p2,p3,p4,p5,do.call("arrangeGrob", c(list(l1,l2,l3,l4,l5),nrow = 1, ncol = 5)),nrow = 3, ncol = 2))))
-
+ggsave("Figure_9.png", plot = output_plot, height = 2200,  width = 5000, units = "px")
   
